@@ -9,18 +9,19 @@ namespace PUBGMESP
     internal class Settings
     {
         public static bool PlayerESP = true;
-        public static bool PlayerBone = false;
+        public static bool PlayerBone = true;
         public static bool PlayerBox = false;
-        public static bool Player3dBox = true;
-        public static bool PlayerLines = true;
-        public static bool PlayerHealth = false;
+        public static bool Player3dBox = false;
+        public static bool PlayerLines = false;
+        public static bool PlayerHealth = true;
         public static bool ItemESP = false;
         public static bool VehicleESP = false;
+
         public static bool ShowMenu = true;
 
         // aimbot
-        public static bool aimEnabled = true;
-        public static bool bDrawFow = true;
+        public static bool aimEnabled = false;
+        public static bool bDrawFow = false;
         public static int bSmooth = 11;
         public static int bFovInt = 2;
         public static int bPredict = 1;

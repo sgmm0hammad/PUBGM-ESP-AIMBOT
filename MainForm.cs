@@ -66,7 +66,8 @@ namespace PUBGMESP
             // Enable Debug Privilige
             EnableDebugPriv();
             // Get Window Handle
-            hwnd = FindWindow("TXGuiFoundation", "Gameloop【Turbo AOW Engine】");
+            // #changed 
+            hwnd = FindWindow("TXGuiFoundation", Process.GetProcessesByName("AndroidEmulator")[0].MainWindowTitle);
             Console.WriteLine(hwnd);
             if (hwnd == IntPtr.Zero)
             {
