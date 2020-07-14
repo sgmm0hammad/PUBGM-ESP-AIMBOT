@@ -66,8 +66,12 @@ namespace PUBGMESP
             // Enable Debug Privilige
             EnableDebugPriv();
             // Get Window Handle
+<<<<<<< HEAD
             // #changed 
             hwnd = FindWindow("TXGuiFoundation", Process.GetProcessesByName("AndroidEmulator")[0].MainWindowTitle);
+=======
+            hwnd = FindWindow("TXGuiFoundation", "Gameloop【Turbo AOW Engine-4.4】");
+>>>>>>> e2e3c4fbdf64fc30a505616ba4947c208db23355
             Console.WriteLine(hwnd);
             if (hwnd == IntPtr.Zero)
             {
@@ -100,8 +104,8 @@ namespace PUBGMESP
             ueSearch = new GameMemSearch(sigScan);
             var cands = ueSearch.ViewWorldSearchCandidates();
             viewWorld = ueSearch.GetViewWorld(cands);
-            uWorld = viewWorld - 4270704;
-            gNames = viewWorld - 1645436;
+            uWorld = viewWorld - 4340704;
+            gNames = viewWorld - 1658780;
             if (uWorld > 0)
             {
                 // Start Drawing ESP
@@ -128,7 +132,7 @@ namespace PUBGMESP
             int controllerOffset, posOffset, healthOffset, nameOffset, teamIDOffset, poseOffset, statusOffset;
             controllerOffset = 96;
             posOffset = 336;
-            healthOffset = 1920;
+            healthOffset = 1928;
             nameOffset = 1512;
             teamIDOffset = 1552;
             statusOffset = 868;
@@ -141,7 +145,7 @@ namespace PUBGMESP
                 gameInstance = Mem.ReadMemory<int>(uWorlds + 36);
                 playerController = Mem.ReadMemory<int>(gameInstance + controllerOffset);
                 playerCarry = Mem.ReadMemory<int>(playerController + 32);
-                uMyObject = Mem.ReadMemory<int>(playerCarry + 788);
+                uMyObject = Mem.ReadMemory<int>(playerCarry + 792); //788 old value
                 //uMyself = Mem.ReadMemory<int>(uLevel + 124);
                 //uMyself = Mem.ReadMemory<int>(uMyself + 36);
                 //uMyself = Mem.ReadMemory<int>(uMyself + 312);
@@ -150,7 +154,7 @@ namespace PUBGMESP
                 //myWorld = Mem.ReadMemory<int>(uMyObject + 312);
                 //myObjectPos = Mem.ReadMemory<Vector3>(myWorld + posOffset);
                 entityEntry = Mem.ReadMemory<int>(uLevel + 112);
-                entityCount = Mem.ReadMemory<int>(uLevel + 116);
+                entityCount = Mem.ReadMemory<int>(uLevel + 120); //116 old value
                 // Initilize Display Data
                 DisplayData data = new DisplayData(viewWorld, uMyObject);
                 List<PlayerData> playerList = new List<PlayerData>();
@@ -176,11 +180,25 @@ namespace PUBGMESP
   
                             if (status == 6)
                                 continue;
-                            // my team player continue
-                            //int isTeam = Mem.ReadMemory<int>(Mem.ReadMemory<int>(Mem.ReadMemory<int>(entityAddv + 724 + 4)) + 20);
-                            //if (isTeam > 0)
-                            //    continue;
-                            Mem.WriteMemory<int>(Mem.ReadMemory<int>(uMyObject + 2656) + 352, 300000);
+                                
+                            // Enemy weapon
+                            var enemy_weapon = GameData.GetEntityType(gNames, Mem.ReadMemory(Mem.ReadMemory(entityAddv + 5124) + 16));
+                            if (string.IsNullOrEmpty(enemy_weapon))
+                                enemy_weapon = "Fist";
+                            else
+                            {
+                                try
+                                {
+                                    var enemy_weaponList = enemy_weapon.Split('_').ToList();
+                                    enemy_weapon = enemy_weaponList[2];
+                                }
+                                catch
+                                {
+                                    enemy_weapon = "Unknown";
+                                }
+
+                            }
+                            Console.WriteLine(enemy_weapon);
 
                             string name = Encoding.Unicode.GetString(Mem.ReadMemory(Mem.ReadMemory<int>(entityAddv + nameOffset), 32));
                             name = name.Substring(0, name.IndexOf('\0'));

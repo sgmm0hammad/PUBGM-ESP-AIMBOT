@@ -1,5 +1,5 @@
 # PUBGM-ESP-AIMBOT
-Pubg Mobile 0.18.0 ESP &amp; AIMBOT Hack using using BypaPH, bypasses process read/write restrictions.
+Pubg Mobile 0.19.0 ESP &amp; AIMBOT Hack using using BypaPH, bypasses process read/write restrictions.
 
 # Tools:
 - C#
@@ -12,6 +12,8 @@ Features:
 - Grenade Alert
 - Player Health/Name/Distance/Line
 - Simple Aimbot
+- Enemy State
+- Enemy Weapon
 
 # References :-
 - Google.
